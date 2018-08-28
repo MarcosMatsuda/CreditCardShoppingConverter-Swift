@@ -16,6 +16,7 @@
 		3AF8D03B21339FD6004D61C0 /* ProdutoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8D03A21339FD6004D61C0 /* ProdutoTableViewController.swift */; };
 		3AF8D03D2133A65C004D61C0 /* CadastrarProdutoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8D03C2133A65C004D61C0 /* CadastrarProdutoViewController.swift */; };
 		3AF8D03F2133A7A8004D61C0 /* CotacaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8D03E2133A7A8004D61C0 /* CotacaoViewController.swift */; };
+		3AF8D04121350019004D61C0 /* EstadoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8D04021350019004D61C0 /* EstadoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		3AF8D03A21339FD6004D61C0 /* ProdutoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdutoTableViewController.swift; sourceTree = "<group>"; };
 		3AF8D03C2133A65C004D61C0 /* CadastrarProdutoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CadastrarProdutoViewController.swift; sourceTree = "<group>"; };
 		3AF8D03E2133A7A8004D61C0 /* CotacaoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CotacaoViewController.swift; sourceTree = "<group>"; };
+		3AF8D04021350019004D61C0 /* EstadoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstadoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				3AF8D02321338473004D61C0 /* AppDelegate.swift */,
 				3AF8D02521338473004D61C0 /* ViewController.swift */,
 				3AF8D02721338473004D61C0 /* Main.storyboard */,
+				3AF8D04021350019004D61C0 /* EstadoViewController.swift */,
 				3AF8D03E2133A7A8004D61C0 /* CotacaoViewController.swift */,
 				3AF8D03C2133A65C004D61C0 /* CadastrarProdutoViewController.swift */,
 				3AF8D03A21339FD6004D61C0 /* ProdutoTableViewController.swift */,
@@ -152,6 +155,7 @@
 				3AF8D02421338473004D61C0 /* AppDelegate.swift in Sources */,
 				3AF8D03F2133A7A8004D61C0 /* CotacaoViewController.swift in Sources */,
 				3AF8D03B21339FD6004D61C0 /* ProdutoTableViewController.swift in Sources */,
+				3AF8D04121350019004D61C0 /* EstadoViewController.swift in Sources */,
 				3AF8D02C21338473004D61C0 /* credit_card_shopping_converter.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
