@@ -10,31 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Cotacao View Controller-->
-        <scene sceneID="ehW-X5-fwL">
-            <objects>
-                <viewController id="7wv-Nw-K7K" customClass="CotacaoViewController" customModule="credit_card_shopping_converter" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="9R7-gF-eJ3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="cotação" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CfT-AL-OJx">
-                                <rect key="frame" x="166" y="237" width="62" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="k6d-Cq-0l7"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" systemItem="downloads" id="Ldj-LF-cgK"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zac-oI-zrt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1974" y="905"/>
-        </scene>
         <!--Produto Table View Controller-->
         <scene sceneID="8jU-7B-996">
             <objects>
@@ -70,11 +45,11 @@
             </objects>
             <point key="canvasLocation" x="1132" y="1656"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Compras-->
         <scene sceneID="YmD-zH-X6C">
             <objects>
                 <navigationController id="Tye-Xh-wdH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="history" id="u8X-L1-uqA"/>
+                    <tabBarItem key="tabBarItem" title="Compras" id="u8X-L1-uqA"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QYB-rl-WtN">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -87,7 +62,7 @@
             </objects>
             <point key="canvasLocation" x="1132" y="904"/>
         </scene>
-        <!--View Controller-->
+        <!--Total de compras-->
         <scene sceneID="Tnn-Ny-aTp">
             <objects>
                 <viewController id="0RW-pX-fcQ" sceneMemberID="viewController">
@@ -106,13 +81,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="cca-se-gLo"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="topRated" id="AXo-2O-1tZ"/>
+                    <tabBarItem key="tabBarItem" title="Total de compras" id="AXo-2O-1tZ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Beg-zO-Bby" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2865" y="904"/>
+            <point key="canvasLocation" x="3577" y="904"/>
         </scene>
-        <!--Cadastrar Produto View Controller-->
+        <!--Ajustes-->
         <scene sceneID="eIl-8r-34v">
             <objects>
                 <viewController id="dLD-ed-FHF" customClass="CadastrarProdutoViewController" customModule="credit_card_shopping_converter" customModuleProvider="target" sceneMemberID="viewController">
@@ -175,20 +150,21 @@
                                 <rect key="frame" x="337" y="387" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <segue destination="24s-JI-1zt" kind="show" id="yDQ-55-TeR"/>
+                                    <action selector="addEstado:" destination="dLD-ed-FHF" eventType="touchUpInside" id="KGs-XO-R8h"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="NaL-gk-bUv"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Ajustes" id="aY4-im-K4O"/>
                     <connections>
                         <outlet property="ivImagemProduto" destination="70H-CG-IBq" id="WsK-hv-pj4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hut-cW-iWF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1973.5999999999999" y="1655.6221889055473"/>
+            <point key="canvasLocation" x="2460" y="904"/>
         </scene>
         <!--Estado View Controller-->
         <scene sceneID="o0n-V1-hxj">
@@ -255,7 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9nM-zS-7LT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2864.8000000000002" y="1655.6221889055473"/>
+            <point key="canvasLocation" x="2460" y="1656"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="oN9-Kp-eHF">
@@ -267,9 +243,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="7wv-Nw-K7K" kind="relationship" relationship="viewControllers" id="ckI-Pd-DeZ"/>
-                        <segue destination="0RW-pX-fcQ" kind="relationship" relationship="viewControllers" id="vMX-s5-bmd"/>
                         <segue destination="Tye-Xh-wdH" kind="relationship" relationship="viewControllers" id="9sl-xq-iSi"/>
+                        <segue destination="dLD-ed-FHF" kind="relationship" relationship="viewControllers" id="ymV-WP-vEr"/>
+                        <segue destination="0RW-pX-fcQ" kind="relationship" relationship="viewControllers" id="vMX-s5-bmd"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mlx-XW-61d" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -277,4 +253,7 @@
             <point key="canvasLocation" x="1132" y="134"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="ymV-WP-vEr"/>
+    </inferredMetricsTieBreakers>
 </document>
