@@ -7,17 +7,27 @@
 //
 
 import UIKit
+import CoreData
 
 class CadastrarProdutoViewController: UIViewController {
     
-    var estadosArray = [Estado]()
-
+    var estado: Estados!
+    var fetchedResultController: NSFetchRequestResult!
+    var statesManager = StatesManager.shared
+    
     @IBOutlet weak var ivImagemProduto: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadStates()
 
         // Do any additional setup after loading the view.
+    }
+    
+    func loadStates() {
+        statesManager.loadStates(with: context)
+        
+        let fetchEstados : NSFetchRequest<Estados> = Estados.fetchRequest()
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,16 +49,20 @@ class CadastrarProdutoViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "Adicionar", style: .default, handler: { action in
             
-//            if let nome = alert.textFields![0].text {
-//                let nome = Estado(nome: "foo", imposto: 1.5)
-//            }
+            self.estado = Estados(context: self.context)
+            if let nome = alert.textFields![0].text {
+                self.estado.nome = nome
+            }
             
-//            if let imposto = alert.textFields![1].text {
-//                let y = Estado(nome: "foo2", imposto: 2.4)
-//            }
+            if let imposto = alert.textFields![1].text{
+                self.estado.imposto = Double(imposto) ?? 0.0
+            }else{ print("erro ao inserir o imposto") }
             
-//            estadosArray.append(nome)
-//            println(estadosArray)
+            do {
+                try self.context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
             
         }))
         self.present(alert, animated: true)
@@ -127,5 +141,7 @@ extension CadastrarProdutoViewController: UIImagePickerControllerDelegate, UINav
         dismiss(animated: true, completion: nil)
         
     }
+    
+    
     
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3ABA2DAB21365A3E0020615A /* Estado.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABA2DAA21365A3E0020615A /* Estado.swift */; };
+		3ADD5666213780C50074861F /* ViewController+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD5665213780C50074861F /* ViewController+CoreData.swift */; };
+		3ADD566821379F540074861F /* StatesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD566721379F540074861F /* StatesManager.swift */; };
 		3AF8D02421338473004D61C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8D02321338473004D61C0 /* AppDelegate.swift */; };
 		3AF8D02621338473004D61C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8D02521338473004D61C0 /* ViewController.swift */; };
 		3AF8D02921338473004D61C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AF8D02721338473004D61C0 /* Main.storyboard */; };
@@ -20,6 +22,8 @@
 
 /* Begin PBXFileReference section */
 		3ABA2DAA21365A3E0020615A /* Estado.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Estado.swift; sourceTree = "<group>"; };
+		3ADD5665213780C50074861F /* ViewController+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CoreData.swift"; sourceTree = "<group>"; };
+		3ADD566721379F540074861F /* StatesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesManager.swift; sourceTree = "<group>"; };
 		3AF8D02021338473004D61C0 /* credit-card-shopping-converter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "credit-card-shopping-converter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AF8D02321338473004D61C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AF8D02521338473004D61C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +69,7 @@
 				3ABA2DAA21365A3E0020615A /* Estado.swift */,
 				3AF8D02321338473004D61C0 /* AppDelegate.swift */,
 				3AF8D02521338473004D61C0 /* ViewController.swift */,
+				3ADD5665213780C50074861F /* ViewController+CoreData.swift */,
 				3AF8D02721338473004D61C0 /* Main.storyboard */,
 				3AF8D03C2133A65C004D61C0 /* CadastrarProdutoViewController.swift */,
 				3AF8D03A21339FD6004D61C0 /* ProdutoTableViewController.swift */,
@@ -72,6 +77,7 @@
 				3AF8D02F21338473004D61C0 /* LaunchScreen.storyboard */,
 				3AF8D03221338474004D61C0 /* Info.plist */,
 				3AF8D02A21338473004D61C0 /* credit_card_shopping_converter.xcdatamodeld */,
+				3ADD566721379F540074861F /* StatesManager.swift */,
 			);
 			path = "credit-card-shopping-converter";
 			sourceTree = "<group>";
@@ -150,6 +156,8 @@
 				3AF8D03D2133A65C004D61C0 /* CadastrarProdutoViewController.swift in Sources */,
 				3AF8D02621338473004D61C0 /* ViewController.swift in Sources */,
 				3AF8D02421338473004D61C0 /* AppDelegate.swift in Sources */,
+				3ADD566821379F540074861F /* StatesManager.swift in Sources */,
+				3ADD5666213780C50074861F /* ViewController+CoreData.swift in Sources */,
 				3AF8D03B21339FD6004D61C0 /* ProdutoTableViewController.swift in Sources */,
 				3AF8D02C21338473004D61C0 /* credit_card_shopping_converter.xcdatamodeld in Sources */,
 				3ABA2DAB21365A3E0020615A /* Estado.swift in Sources */,
