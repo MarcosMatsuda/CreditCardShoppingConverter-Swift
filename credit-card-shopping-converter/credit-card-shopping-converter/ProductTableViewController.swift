@@ -7,17 +7,41 @@
 //
 
 import UIKit
+import CoreData
 
-class ProdutoTableViewController: UITableViewController {
+class ProductTableViewController: UITableViewController {
 
+    var fetchedResultsController: NSFetchedResultsController<Product>!
+    var labelEmptyTable = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        labelEmptyTable.text = "Sua lista está vazia!"
+        labelEmptyTable.textAlignment = .center
+        loadProducts()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func loadProducts(){
+        let fetchRequest: NSFetchRequest<Product> = Product.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchedResultsController.delegate = self
+        
+        do{
+            try fetchedResultsController.performFetch()
+        }catch{
+            print(error.localizedDescription)
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,25 +51,24 @@ class ProdutoTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        let count = fetchedResultsController.fetchedObjects?.count ?? 0
+        
+        tableView.backgroundView = count == 0 ? labelEmptyTable : nil
+        return count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ProductTableViewCell
+        
+        guard let product = fetchedResultsController.fetchedObjects?[indexPath.row] else { return cell }
+        
+        cell.prepare(with: product)
 
         return cell
     }
-    */
+ 
 
     /*
     // Override to support conditional editing of the table view.
@@ -92,4 +115,15 @@ class ProdutoTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension ProductTableViewController: NSFetchedResultsControllerDelegate {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch (type) {
+        case .delete:
+            break;
+        default:
+            tableView.reloadData()
+        }
+    }
 }

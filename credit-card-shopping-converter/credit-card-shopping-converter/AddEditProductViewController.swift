@@ -9,15 +9,18 @@
 import UIKit
 import CoreData
 
-class CadastrarProdutoViewController: UIViewController {
+class AddEditProductViewController: UIViewController {
+    
+    @IBOutlet weak var tfName: UITextField!
+    
+    @IBOutlet weak var ivImagemProduto: UIImageView!
+    @IBOutlet weak var tfPurchaseState: UITextField!
     
     var estado: [Estados] = []
     var statesManager = StatesManager.shared
     var purchasePickerList = [Estados]()
     var selectedPicker: String?
-    
-    @IBOutlet weak var ivImagemProduto: UIImageView!
-    @IBOutlet weak var tfPurchaseState: UITextField!
+    var product: Product!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +28,33 @@ class CadastrarProdutoViewController: UIViewController {
         createPurchaseStatePicker()
         createToolBar()
         loadPurchaseStatePicker()
+        
 
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func addEditProduct(_ sender: UIButton) {
+        if product == nil {
+            product = Product(context: context)
+        }
+        
+        product.name = tfName.text
+        
+        do{
+            try context.save()
+        }catch{
+            print(error.localizedDescription)
+        }
+        
+        navigationController?.popViewController(animated: true)
     }
     
     func loadStates() {
         statesManager.loadStates(with: context)
         let _ : NSFetchRequest<Estados> = Estados.fetchRequest()
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -166,7 +188,7 @@ class CadastrarProdutoViewController: UIViewController {
 
 }
 
-extension CadastrarProdutoViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+extension AddEditProductViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -188,7 +210,7 @@ extension CadastrarProdutoViewController: UIPickerViewDataSource, UIPickerViewDe
 }
 
 
-extension CadastrarProdutoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension AddEditProductViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         

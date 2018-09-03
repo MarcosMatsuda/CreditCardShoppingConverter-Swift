@@ -10,22 +10,34 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Produto Table View Controller-->
+        <!--Lista de Produtos-->
         <scene sceneID="8jU-7B-996">
             <objects>
-                <tableViewController id="IkR-WA-fbH" customClass="ProdutoTableViewController" customModule="credit_card_shopping_converter" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="IkR-WA-fbH" customClass="ProductTableViewController" customModule="credit_card_shopping_converter" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gM9-Ij-ftt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="F3l-xN-7Qg">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="f6q-fJ-TS0" style="IBUITableViewCellStyleDefault" id="F3l-xN-7Qg" customClass="ProductTableViewCell" customModule="credit_card_shopping_converter" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="F3l-xN-7Qg" id="g6u-sJ-In5">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f6q-fJ-TS0">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="lbName" destination="f6q-fJ-TS0" id="kTS-Z6-Yfj"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -33,10 +45,10 @@
                             <outlet property="delegate" destination="IkR-WA-fbH" id="6q2-qX-ew3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="iKb-Fa-m7J">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Z2Z-tM-BJK">
+                    <navigationItem key="navigationItem" title="Lista de Produtos" id="iKb-Fa-m7J">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="I02-ab-PnR">
                             <connections>
-                                <segue destination="dLD-ed-FHF" kind="show" id="3ko-gC-3lf"/>
+                                <segue destination="dLD-ed-FHF" kind="show" id="Xbf-3s-1wk"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -85,12 +97,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Beg-zO-Bby" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3577" y="904"/>
+            <point key="canvasLocation" x="3068" y="989"/>
         </scene>
         <!--Ajustes-->
         <scene sceneID="eIl-8r-34v">
             <objects>
-                <viewController id="dLD-ed-FHF" customClass="CadastrarProdutoViewController" customModule="credit_card_shopping_converter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dLD-ed-FHF" customClass="AddEditProductViewController" customModule="credit_card_shopping_converter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XX0-bP-TPC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -133,6 +145,9 @@
                                 <color key="backgroundColor" red="0.17173057794570923" green="0.55213868618011475" blue="0.92847937345504761" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="CADASTRAR"/>
+                                <connections>
+                                    <action selector="addEditProduct:" destination="dLD-ed-FHF" eventType="touchUpInside" id="zFa-Lo-8Ej"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70H-CG-IBq">
                                 <rect key="frame" x="16" y="163" width="343" height="200"/>
@@ -151,6 +166,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="addEstado:" destination="dLD-ed-FHF" eventType="touchUpInside" id="KGs-XO-R8h"/>
+                                    <segue destination="24s-JI-1zt" kind="show" id="XSg-KA-RGS"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -160,14 +176,15 @@
                     <tabBarItem key="tabBarItem" title="Ajustes" id="aY4-im-K4O"/>
                     <connections>
                         <outlet property="ivImagemProduto" destination="70H-CG-IBq" id="WsK-hv-pj4"/>
+                        <outlet property="tfName" destination="k8a-2r-gtj" id="69k-l9-sPr"/>
                         <outlet property="tfPurchaseState" destination="3Be-DD-mML" id="hto-AH-CLA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hut-cW-iWF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2460" y="904"/>
+            <point key="canvasLocation" x="2154" y="1709"/>
         </scene>
-        <!--Estado View Controller-->
+        <!--Ajustes-->
         <scene sceneID="o0n-V1-hxj">
             <objects>
                 <viewController id="24s-JI-1zt" customClass="EstadoViewController" customModule="credit_card_shopping_converter" customModuleProvider="target" sceneMemberID="viewController">
@@ -229,10 +246,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="92b-A9-jNW"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Ajustes" id="BCq-7V-u6X"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9nM-zS-7LT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2460" y="1656"/>
+            <point key="canvasLocation" x="2175" y="979"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="oN9-Kp-eHF">
@@ -245,7 +263,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="Tye-Xh-wdH" kind="relationship" relationship="viewControllers" id="9sl-xq-iSi"/>
-                        <segue destination="dLD-ed-FHF" kind="relationship" relationship="viewControllers" id="ymV-WP-vEr"/>
+                        <segue destination="24s-JI-1zt" kind="relationship" relationship="viewControllers" id="MWj-2P-ESj"/>
                         <segue destination="0RW-pX-fcQ" kind="relationship" relationship="viewControllers" id="vMX-s5-bmd"/>
                     </connections>
                 </tabBarController>
@@ -255,6 +273,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ymV-WP-vEr"/>
+        <segue reference="XSg-KA-RGS"/>
     </inferredMetricsTieBreakers>
 </document>

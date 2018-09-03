@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct Estado {
+struct State {
     var nome: String = ""
     var imposto: Double = 0.0
     
