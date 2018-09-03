@@ -11,23 +11,27 @@ import CoreData
 
 class CadastrarProdutoViewController: UIViewController {
     
-    var estado: Estados!
-    var fetchedResultController: NSFetchRequestResult!
+    var estado: [Estados] = []
     var statesManager = StatesManager.shared
+    var purchasePickerList = [Estados]()
+    var selectedPicker: String?
     
     @IBOutlet weak var ivImagemProduto: UIImageView!
+    @IBOutlet weak var tfPurchaseState: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadStates()
+        //loadStates()
+        createPurchaseStatePicker()
+        createToolBar()
+        loadPurchaseStatePicker()
 
         // Do any additional setup after loading the view.
     }
     
     func loadStates() {
         statesManager.loadStates(with: context)
-        
-        let fetchEstados : NSFetchRequest<Estados> = Estados.fetchRequest()
+        let _ : NSFetchRequest<Estados> = Estados.fetchRequest()
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,7 +39,7 @@ class CadastrarProdutoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func addEstado(_ sender: Any) {
+    func showAlert(state: Estados?){
         let alert = UIAlertController(title: "Adicionar estado", message: nil, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
@@ -49,23 +53,25 @@ class CadastrarProdutoViewController: UIViewController {
         
         alert.addAction(UIAlertAction(title: "Adicionar", style: .default, handler: { action in
             
-            self.estado = Estados(context: self.context)
-            if let nome = alert.textFields![0].text {
-                self.estado.nome = nome
-            }
+            let stateName = alert.textFields![0].text!
+            let tributeValue = alert.textFields![1].text!
             
-            if let imposto = alert.textFields![1].text{
-                self.estado.imposto = Double(imposto) ?? 0.0
-            }else{ print("erro ao inserir o imposto") }
-            
+            let state = state ?? Estados(context: self.context)
+            state.nome = stateName
+            state.imposto = Double(tributeValue) ?? 0.0
             do {
                 try self.context.save()
             } catch {
                 print(error.localizedDescription)
             }
-            
+
         }))
         self.present(alert, animated: true)
+
+    }
+    
+    @IBAction func addEstado(_ sender: Any) {
+        showAlert(state: nil)
     }
     
     @IBAction func addImagemProduto(_ sender: Any) {
@@ -114,8 +120,73 @@ class CadastrarProdutoViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func createDayPicker(){
+        let dayPicker = UIPickerView()
+        dayPicker.delegate = self
+        tfPurchaseState.inputView = dayPicker
+    }
+    
+    func createPurchaseStatePicker(){
+        
+        let purchaseStatePicker = UIPickerView()
+        purchaseStatePicker.delegate = self
+        
+        tfPurchaseState.inputView = purchaseStatePicker
+    }
+    
+    func loadPurchaseStatePicker(){
+        statesManager.loadStates(with: context)
+        let fetchRequest : NSFetchRequest<Estados> = Estados.fetchRequest()
+        
+//        fetchRequest.propertiesToFetch = ["nome"]
+        
+        purchasePickerList = try! context.fetch(fetchRequest)
+        
+        print( purchasePickerList )
+    }
+    
+    func createToolBar(){
+        
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "OK", style: .plain, target: self, action: #selector(dismissKeyboard) )
+        
+        toolBar.setItems([doneButton], animated: false)
+        
+        toolBar.isUserInteractionEnabled = true
+        
+        tfPurchaseState.inputAccessoryView = toolBar
+    }
+    
+    @objc func dismissKeyboard(){
+        self.view.endEditing(true)
+    }
 
 }
+
+extension CadastrarProdutoViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return purchasePickerList.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> Estados? {
+        return purchasePickerList[row]
+    }
+
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        selectedPicker = purchasePickerList[row]
+//        tfPurchaseState.text = selectedPicker
+//    }
+    
+}
+
 
 extension CadastrarProdutoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -142,6 +213,5 @@ extension CadastrarProdutoViewController: UIImagePickerControllerDelegate, UINav
         
     }
     
-    
-    
 }
+

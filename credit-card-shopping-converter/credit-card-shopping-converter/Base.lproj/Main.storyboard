@@ -160,6 +160,7 @@
                     <tabBarItem key="tabBarItem" title="Ajustes" id="aY4-im-K4O"/>
                     <connections>
                         <outlet property="ivImagemProduto" destination="70H-CG-IBq" id="WsK-hv-pj4"/>
+                        <outlet property="tfPurchaseState" destination="3Be-DD-mML" id="hto-AH-CLA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hut-cW-iWF" userLabel="First Responder" sceneMemberID="firstResponder"/>
