@@ -11,6 +11,9 @@ import UIKit
 class ProductTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lbName: UILabel!
+    @IBOutlet weak var lbPrice: UILabel!
+    @IBOutlet weak var ImageProduct: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,7 +25,17 @@ class ProductTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
     func prepare(with product: Product){
         lbName.text = product.name ?? ""
+       
+        guard let price = product.price else {
+            print("0")
+            return
+        }
+        
+        lbPrice.text = "US$ \( String(describing: price) )"
+        ImageProduct.image = product.cover as? UIImage
     }
+    
 }

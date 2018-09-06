@@ -12,7 +12,7 @@ import CoreData
 class AddEditProductViewController: UIViewController {
     
     @IBOutlet weak var tfName: UITextField!
-    
+    @IBOutlet weak var tfPrice: UITextField!
     @IBOutlet weak var ivImagemProduto: UIImageView!
     @IBOutlet weak var tfPurchaseState: UITextField!
     
@@ -24,10 +24,12 @@ class AddEditProductViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //loadStates()
+        loadStates()
         createPurchaseStatePicker()
         createToolBar()
         loadPurchaseStatePicker()
+        //self.tfPrice.keyboardType = .decimalPad
+        self.hideKeyboardWhenTappedAround()
         
 
         // Do any additional setup after loading the view.
@@ -39,6 +41,8 @@ class AddEditProductViewController: UIViewController {
         }
         
         product.name = tfName.text
+        product.price = decimal(with: tfPrice.text!)
+        product.cover = ivImagemProduto.image
         
         do{
             try context.save()
@@ -48,6 +52,14 @@ class AddEditProductViewController: UIViewController {
         
         navigationController?.popViewController(animated: true)
     }
+    
+    func decimal(with string: String) -> NSDecimalNumber {
+        let formatter = NumberFormatter()
+        formatter.generatesDecimalNumbers = true
+        return formatter.number(from: string) as? NSDecimalNumber ?? 0
+    }
+    
+    
     
     func loadStates() {
         statesManager.loadStates(with: context)
@@ -181,11 +193,18 @@ class AddEditProductViewController: UIViewController {
         
         tfPurchaseState.inputAccessoryView = toolBar
     }
-    
-    @objc func dismissKeyboard(){
-        self.view.endEditing(true)
-    }
 
+}
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer =     UITapGestureRecognizer(target: self, action:    #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 extension AddEditProductViewController: UIPickerViewDataSource, UIPickerViewDelegate {
@@ -234,6 +253,7 @@ extension AddEditProductViewController: UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true, completion: nil)
         
     }
+    
     
 }
 

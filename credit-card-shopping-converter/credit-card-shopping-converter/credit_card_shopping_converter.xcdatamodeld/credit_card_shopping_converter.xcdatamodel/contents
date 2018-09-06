@@ -9,7 +9,7 @@
         <attribute name="cartao" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="cover" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" maxValueString="50" syncable="YES"/>
-        <attribute name="valor" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <relationship name="estado" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Estados" inverseName="produto" inverseEntity="Estados" syncable="YES"/>
     </entity>
     <elements>
