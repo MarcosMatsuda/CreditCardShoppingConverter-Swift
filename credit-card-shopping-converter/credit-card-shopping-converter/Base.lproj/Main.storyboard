@@ -27,7 +27,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9T-Qq-XdE">
-                                            <rect key="frame" x="62" y="12" width="117" height="21"/>
+                                            <rect key="frame" x="62" y="12" width="129" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -38,7 +38,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMp-tS-8SG">
-                                            <rect key="frame" x="199" y="12" width="104" height="21"/>
+                                            <rect key="frame" x="199" y="12" width="142" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -50,6 +50,7 @@
                                     <outlet property="ImageProduct" destination="xhp-Xh-CtE" id="i18-cJ-SJl"/>
                                     <outlet property="lbName" destination="K9T-Qq-XdE" id="O2j-We-9qq"/>
                                     <outlet property="lbPrice" destination="HMp-tS-8SG" id="NEU-qe-RpU"/>
+                                    <segue destination="dLD-ed-FHF" kind="show" identifier="addEditProduct" id="PZh-m4-EtJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -68,7 +69,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A8y-fT-3Pg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1132" y="1655.6221889055473"/>
+            <point key="canvasLocation" x="1132" y="1709"/>
         </scene>
         <!--Compras-->
         <scene sceneID="YmD-zH-X6C">
@@ -178,7 +179,6 @@
                                 <rect key="frame" x="337" y="387" width="22" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
-                                    <action selector="addEstado:" destination="dLD-ed-FHF" eventType="touchUpInside" id="KGs-XO-R8h"/>
                                     <segue destination="24s-JI-1zt" kind="show" id="XSg-KA-RGS"/>
                                 </connections>
                             </button>
@@ -188,8 +188,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Ajustes" id="aY4-im-K4O"/>
                     <connections>
+                        <outlet property="creditCard" destination="UqP-uJ-Edm" id="Vb9-ZV-ELr"/>
                         <outlet property="ivImagemProduto" destination="70H-CG-IBq" id="WsK-hv-pj4"/>
+                        <outlet property="lbAddEdit" destination="Wdf-ae-1zU" id="E0q-8g-feV"/>
                         <outlet property="tfName" destination="k8a-2r-gtj" id="69k-l9-sPr"/>
+                        <outlet property="tfPrice" destination="5IL-vA-7c1" id="6pP-WD-DVp"/>
                         <outlet property="tfPurchaseState" destination="3Be-DD-mML" id="hto-AH-CLA"/>
                     </connections>
                 </viewController>
@@ -200,7 +203,7 @@
         <!--Ajustes-->
         <scene sceneID="o0n-V1-hxj">
             <objects>
-                <viewController id="24s-JI-1zt" customClass="EstadoViewController" customModule="credit_card_shopping_converter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="24s-JI-1zt" customClass="AjustesViewController" customModule="credit_card_shopping_converter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wu1-Xn-I5q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -287,5 +290,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="XSg-KA-RGS"/>
+        <segue reference="PZh-m4-EtJ"/>
     </inferredMetricsTieBreakers>
 </document>

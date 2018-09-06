@@ -14,6 +14,8 @@ class ProductTableViewCell: UITableViewCell {
     @IBOutlet weak var lbPrice: UILabel!
     @IBOutlet weak var ImageProduct: UIImageView!
     
+    @IBOutlet weak var lbCreditCard: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,14 +30,13 @@ class ProductTableViewCell: UITableViewCell {
     
     func prepare(with product: Product){
         lbName.text = product.name ?? ""
-       
-        guard let price = product.price else {
-            print("0")
-            return
+        if let price = product.price {
+            lbPrice.text = "US$ \( String(describing: price) )"
         }
-        
-        lbPrice.text = "US$ \( String(describing: price) )"
         ImageProduct.image = product.cover as? UIImage
+//        lbCreditCard.text = String(product.credit_card)        
     }
     
 }
+
+

@@ -10,12 +10,12 @@ import CoreData
 class StatesManager{
     
     static let shared = StatesManager()
-    var states: [Estados] = []
+    var states: [States] = []
     
     func loadStates(with context: NSManagedObjectContext){
         
-        let fetchRequest: NSFetchRequest<Estados> = Estados.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
+        let fetchRequest: NSFetchRequest<States> = States.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         do {

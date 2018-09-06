@@ -12,13 +12,15 @@ import CoreData
 class AddEditProductViewController: UIViewController {
     
     @IBOutlet weak var tfName: UITextField!
-    @IBOutlet weak var tfPrice: UITextField!
     @IBOutlet weak var ivImagemProduto: UIImageView!
     @IBOutlet weak var tfPurchaseState: UITextField!
+    @IBOutlet weak var tfPrice: UITextField!
+    @IBOutlet weak var creditCard: UISwitch!
+    @IBOutlet weak var lbAddEdit: UIButton!
     
-    var estado: [Estados] = []
+    var estado: [States] = []
     var statesManager = StatesManager.shared
-    var purchasePickerList = [Estados]()
+    var purchasePickerList = [States]()
     var selectedPicker: String?
     var product: Product!
     
@@ -28,11 +30,38 @@ class AddEditProductViewController: UIViewController {
         createPurchaseStatePicker()
         createToolBar()
         loadPurchaseStatePicker()
-        //self.tfPrice.keyboardType = .decimalPad
+        self.tfPrice.keyboardType = .decimalPad
         self.hideKeyboardWhenTappedAround()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if product != nil {
+            title = "Alterar produto"
+            lbAddEdit.setTitle("Alterar", for: .normal)
+            
+            tfName.text = product.name
+            
+            if let price = product.price {
+                tfPrice.text = String(describing: price)
+            }
+            
+            ivImagemProduto.image = product.cover as? UIImage
+            
+            if product.credit_card {
+                creditCard.setOn(true, animated:true)
+            }else{
+                creditCard.setOn(false, animated:true)
+            }
+            
+//            falta estado da compra - pickerView
+//            if let console = product.estado, let index = statesManager.consoles.index(of: console){
+//                tfConsole.text = console.name
+//                pickerView.selectRow(index, inComponent: 0, animated: false)
+//            }
 
-        // Do any additional setup after loading the view.
+            
+        }
     }
     
     @IBAction func addEditProduct(_ sender: UIButton) {
@@ -43,6 +72,7 @@ class AddEditProductViewController: UIViewController {
         product.name = tfName.text
         product.price = decimal(with: tfPrice.text!)
         product.cover = ivImagemProduto.image
+        product.credit_card = creditCard.isOn
         
         do{
             try context.save()
@@ -63,7 +93,7 @@ class AddEditProductViewController: UIViewController {
     
     func loadStates() {
         statesManager.loadStates(with: context)
-        let _ : NSFetchRequest<Estados> = Estados.fetchRequest()
+        let _ : NSFetchRequest<States> = States.fetchRequest()
     }
     
     
@@ -73,40 +103,10 @@ class AddEditProductViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func showAlert(state: Estados?){
-        let alert = UIAlertController(title: "Adicionar estado", message: nil, preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
-        
-        alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = "Nome do estado"
-        })
-        alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = "Imposto"
-        })
-        
-        alert.addAction(UIAlertAction(title: "Adicionar", style: .default, handler: { action in
-            
-            let stateName = alert.textFields![0].text!
-            let tributeValue = alert.textFields![1].text!
-            
-            let state = state ?? Estados(context: self.context)
-            state.nome = stateName
-            state.imposto = Double(tributeValue) ?? 0.0
-            do {
-                try self.context.save()
-            } catch {
-                print(error.localizedDescription)
-            }
-
-        }))
-        self.present(alert, animated: true)
-
-    }
     
-    @IBAction func addEstado(_ sender: Any) {
-        showAlert(state: nil)
-    }
+    
+    
+    
     
     @IBAction func addImagemProduto(_ sender: Any) {
         
@@ -171,7 +171,7 @@ class AddEditProductViewController: UIViewController {
     
     func loadPurchaseStatePicker(){
         statesManager.loadStates(with: context)
-        let fetchRequest : NSFetchRequest<Estados> = Estados.fetchRequest()
+        let fetchRequest : NSFetchRequest<States> = States.fetchRequest()
         
 //        fetchRequest.propertiesToFetch = ["nome"]
         
@@ -217,7 +217,7 @@ extension AddEditProductViewController: UIPickerViewDataSource, UIPickerViewDele
         return purchasePickerList.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> Estados? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> States? {
         return purchasePickerList[row]
     }
 
