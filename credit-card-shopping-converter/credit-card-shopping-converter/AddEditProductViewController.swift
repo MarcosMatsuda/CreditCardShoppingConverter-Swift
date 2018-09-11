@@ -165,7 +165,6 @@ class AddEditProductViewController: UIViewController {
         
         let purchaseStatePicker = UIPickerView()
         purchaseStatePicker.delegate = self
-        
         tfPurchaseState.inputView = purchaseStatePicker
     }
     
@@ -173,7 +172,7 @@ class AddEditProductViewController: UIViewController {
         statesManager.loadStates(with: context)
         let fetchRequest : NSFetchRequest<States> = States.fetchRequest()
         
-//        fetchRequest.propertiesToFetch = ["nome"]
+        fetchRequest.propertiesToFetch = ["name"]
         
         purchasePickerList = try! context.fetch(fetchRequest)
         
