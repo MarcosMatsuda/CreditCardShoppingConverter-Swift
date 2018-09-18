@@ -19,48 +19,66 @@ class AddEditProductViewController: UIViewController {
     @IBOutlet weak var lbAddEdit: UIButton!
     
     var estado: [States] = []
-    var statesManager = StatesManager.shared
+    
     var purchasePickerList = [States]()
-    var selectedPicker: String?
     var product: Product!
+    
+    
+    lazy var pickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        return pickerView
+    }()
+    var statesManager = StatesManager.shared
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadStates()
-        createPurchaseStatePicker()
         createToolBar()
-        loadPurchaseStatePicker()
+        loadStates()
+        //createPurchaseStatePicker()
+        //loadPurchaseStatePicker()
         self.tfPrice.keyboardType = .decimalPad
         self.hideKeyboardWhenTappedAround()
         
     }
     
+    @objc func cancel(){
+        tfPurchaseState.resignFirstResponder()
+    }
+    
+    @objc func done(){
+        tfPurchaseState.text = statesManager.states[pickerView.selectedRow(inComponent: 0)].name
+        cancel()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        statesManager.loadStates(with: context)
+        
         if product != nil {
             title = "Alterar produto"
             lbAddEdit.setTitle("Alterar", for: .normal)
-            
+
             tfName.text = product.name
-            
+
             if let price = product.price {
                 tfPrice.text = String(describing: price)
             }
-            
+
             ivImagemProduto.image = product.cover as? UIImage
-            
+
             if product.credit_card {
                 creditCard.setOn(true, animated:true)
             }else{
                 creditCard.setOn(false, animated:true)
             }
-            
-//            falta estado da compra - pickerView
-//            if let console = product.estado, let index = statesManager.consoles.index(of: console){
-//                tfConsole.text = console.name
-//                pickerView.selectRow(index, inComponent: 0, animated: false)
-//            }
 
-            
+
         }
     }
     
@@ -73,6 +91,11 @@ class AddEditProductViewController: UIViewController {
         product.price = decimal(with: tfPrice.text!)
         product.cover = ivImagemProduto.image
         product.credit_card = creditCard.isOn
+        
+        if !tfPurchaseState.text!.isEmpty {
+            let state = statesManager.states[pickerView.selectedRow(inComponent: 0)]
+            product.state = String(describing: state)
+        }        
         
         do{
             try context.save()
@@ -155,14 +178,14 @@ class AddEditProductViewController: UIViewController {
     }
     */
     
-    func createDayPicker(){
-        let dayPicker = UIPickerView()
-        dayPicker.delegate = self
-        tfPurchaseState.inputView = dayPicker
-    }
+//    func createDayPicker(){
+//        let dayPicker = UIPickerView()
+//        dayPicker.delegate = self
+//        tfPurchaseState.inputView = dayPicker
+//    }
     
     func createPurchaseStatePicker(){
-        
+
         let purchaseStatePicker = UIPickerView()
         purchaseStatePicker.delegate = self
         tfPurchaseState.inputView = purchaseStatePicker
@@ -171,25 +194,22 @@ class AddEditProductViewController: UIViewController {
     func loadPurchaseStatePicker(){
         statesManager.loadStates(with: context)
         let fetchRequest : NSFetchRequest<States> = States.fetchRequest()
-        
+
         fetchRequest.propertiesToFetch = ["name"]
-        
+
         purchasePickerList = try! context.fetch(fetchRequest)
-        
+
         print( purchasePickerList )
     }
     
     func createToolBar(){
         
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(title: "OK", style: .plain, target: self, action: #selector(dismissKeyboard) )
-        
-        toolBar.setItems([doneButton], animated: false)
-        
-        toolBar.isUserInteractionEnabled = true
-        
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
+        let btCancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
+        let btDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
+        let btFlexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolBar.items = [btCancel, btFlexibleSpace, btDone]
+        tfPurchaseState.inputView = pickerView
         tfPurchaseState.inputAccessoryView = toolBar
     }
 
@@ -206,6 +226,7 @@ extension UIViewController {
     }
 }
 
+//ok
 extension AddEditProductViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -213,17 +234,13 @@ extension AddEditProductViewController: UIPickerViewDataSource, UIPickerViewDele
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return purchasePickerList.count
+        return statesManager.states.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> States? {
-        return purchasePickerList[row]
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        let state = statesManager.states[row]
+        return state.name
     }
-
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        selectedPicker = purchasePickerList[row]
-//        tfPurchaseState.text = selectedPicker
-//    }
     
 }
 

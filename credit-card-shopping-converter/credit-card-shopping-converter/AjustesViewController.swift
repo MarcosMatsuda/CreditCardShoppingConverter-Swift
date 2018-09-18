@@ -27,6 +27,7 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
         loadStates()
     }
     
+    //ok
     func loadStates(){
         let fetchRequest: NSFetchRequest<States> = States.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
@@ -48,66 +49,102 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.didReceiveMemoryWarning()
     }
     
-    //???
+    //ok
     @IBAction func addEstado(_ sender: Any) {
         showAlert(state: nil)
     }
     
+    //ok
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = fetchedResultsController.fetchedObjects?.count ?? 0
-        print("marcos")
-//        tableView.backgroundView = count == 0 ? labelEmptyTable : nil
         return count
     }
     
     
-    
+    //ok
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_states", for: indexPath) 
         guard let state = fetchedResultsController.fetchedObjects?[indexPath.row] else { return cell }
 
         cell.textLabel?.text = state.name
-        cell.detailTextLabel?.text = "% \(state.tribute)"
+        cell.detailTextLabel?.text = "\(state.tribute)%"
         return cell
   
     }
     
-    
+    //ok
     func showAlert(state: States?){
-        let alert = UIAlertController(title: "Adicionar estado", message: nil, preferredStyle: .alert)
+        
+        let title = state == nil ? "Adicionar" : "Editar"
+        
+        let alert = UIAlertController(title: title + " estado", message: nil, preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
         
         alert.addTextField(configurationHandler: { textField in
             textField.placeholder = "Nome do estado"
-        })
-        alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = "Imposto"
+            if let name = state?.name {
+                textField.text = name
+            }
         })
         
-        alert.addAction(UIAlertAction(title: "Adicionar", style: .default, handler: { action in
-            
-            let stateName = alert.textFields![0].text!
-//            let tributeValue = alert.textFields![1].text!
-//
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Imposto"
+            if let tribute = state?.tribute {
+                textField.text = String(format:"%f", tribute)
+            }
+        })
+
+        
+        alert.addAction(UIAlertAction(title: title, style: .default, handler: { (action) in
             let state = state ?? States(context: self.context)
-            state.name = stateName
-//            state.tribute = Double(tributeValue) ?? 0.0
+            state.name = alert.textFields?.first?.text
+            
+            let tributeValue = alert.textFields?.last?.text
+            state.tribute = tributeValue?.toDouble() ?? 0.0
+            
             do {
                 try self.context.save()
-                //self.loadSates()
-                //nao esta atualizando a lista
+                self.loadStates()
             } catch {
                 print(error.localizedDescription)
             }
             
         }))
-        self.present(alert, animated: true)
+        present(alert, animated: true)
         
+    }
+    
+    //ok
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    //ok
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let product = fetchedResultsController.fetchedObjects?[indexPath.row] else {return}
+            context.delete(product)
+        }
+    }
+    
+    //ok
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let state = fetchedResultsController.object(at: indexPath)
+        showAlert(state: state)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
+//ok
+extension String {
+    func toDouble() -> Double? {
+        return NumberFormatter().number(from: self)?.doubleValue
+    }
+}
+
+//ok
 extension AjustesViewController: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch (type) {
