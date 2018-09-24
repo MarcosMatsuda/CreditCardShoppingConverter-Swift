@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A61320D21586B1F00D83214 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61320C21586B1F00D83214 /* ResultViewController.swift */; };
 		3A91D8E6213CE21C00F89250 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91D8E5213CE21C00F89250 /* ProductTableViewCell.swift */; };
 		3AB401F32140E80C0015D1C9 /* AjustesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB401F22140E80C0015D1C9 /* AjustesViewController.swift */; };
 		3ADD5666213780C50074861F /* ViewController+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD5665213780C50074861F /* ViewController+CoreData.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A61320C21586B1F00D83214 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		3A91D8E5213CE21C00F89250 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		3AB401F22140E80C0015D1C9 /* AjustesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjustesViewController.swift; sourceTree = "<group>"; };
 		3ADD5665213780C50074861F /* ViewController+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CoreData.swift"; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				3AF8D02321338473004D61C0 /* AppDelegate.swift */,
+				3A61320C21586B1F00D83214 /* ResultViewController.swift */,
 				3AF8D02521338473004D61C0 /* ViewController.swift */,
 				3ADD5665213780C50074861F /* ViewController+CoreData.swift */,
 				3AF8D02721338473004D61C0 /* Main.storyboard */,
@@ -161,6 +164,7 @@
 				3AF8D02621338473004D61C0 /* ViewController.swift in Sources */,
 				3A91D8E6213CE21C00F89250 /* ProductTableViewCell.swift in Sources */,
 				3AF8D02421338473004D61C0 /* AppDelegate.swift in Sources */,
+				3A61320D21586B1F00D83214 /* ResultViewController.swift in Sources */,
 				3ADD566821379F540074861F /* StatesManager.swift in Sources */,
 				3ADD5666213780C50074861F /* ViewController+CoreData.swift in Sources */,
 				3AF8D03B21339FD6004D61C0 /* ProductTableViewController.swift in Sources */,

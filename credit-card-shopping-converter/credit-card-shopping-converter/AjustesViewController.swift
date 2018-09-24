@@ -27,7 +27,6 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
         loadStates()
     }
     
-    //ok
     func loadStates(){
         let fetchRequest: NSFetchRequest<States> = States.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
@@ -49,19 +48,15 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.didReceiveMemoryWarning()
     }
     
-    //ok
     @IBAction func addEstado(_ sender: Any) {
         showAlert(state: nil)
     }
     
-    //ok
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = fetchedResultsController.fetchedObjects?.count ?? 0
         return count
     }
     
-    
-    //ok
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_states", for: indexPath) 
@@ -73,7 +68,6 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
   
     }
     
-    //ok
     func showAlert(state: States?){
         
         let title = state == nil ? "Adicionar" : "Editar"
@@ -116,12 +110,10 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
-    //ok
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    //ok
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let product = fetchedResultsController.fetchedObjects?[indexPath.row] else {return}
@@ -129,7 +121,6 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    //ok
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let state = fetchedResultsController.object(at: indexPath)
         showAlert(state: state)
@@ -137,14 +128,12 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 }
 
-//ok
 extension String {
     func toDouble() -> Double? {
         return NumberFormatter().number(from: self)?.doubleValue
     }
 }
 
-//ok
 extension AjustesViewController: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch (type) {

@@ -30,9 +30,7 @@ class ProductTableViewCell: UITableViewCell {
     
     func prepare(with product: Product){
         lbName.text = product.name ?? ""
-        if let price = product.price {
-            lbPrice.text = "US$ \( String(describing: price) )"
-        }
+        lbPrice.text = "US$ \( String(describing: product.price) )"        
         ImageProduct.image = product.cover as? UIImage
 //        lbCreditCard.text = String(product.credit_card)        
     }
