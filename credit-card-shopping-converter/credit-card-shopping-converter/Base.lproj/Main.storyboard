@@ -313,7 +313,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Ajustes" id="BCq-7V-u6X"/>
                     <connections>
+                        <outlet property="dollarQuotation" destination="56U-PO-yeT" id="NAo-7x-zMX"/>
                         <outlet property="tableView" destination="xPA-0N-KGk" id="3tY-yT-lwQ"/>
+                        <outlet property="taxOnFinancialOrder" destination="Scq-1m-DR9" id="XyZ-NR-gag"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9nM-zS-7LT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -341,7 +343,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="MWj-2P-ESj"/>
+        <segue reference="XSg-KA-RGS"/>
         <segue reference="PZh-m4-EtJ"/>
     </inferredMetricsTieBreakers>
 </document>

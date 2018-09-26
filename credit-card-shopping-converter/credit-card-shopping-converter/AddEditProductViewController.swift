@@ -70,18 +70,35 @@ class AddEditProductViewController: UIViewController {
     
     @IBAction func addEditProduct(_ sender: UIButton) {
         
-        product.name = tfName.text
-        if let price = tfPrice.text{
-            product.price = Double( price )!
+        if let name = tfName.text {
+            if tfName.text!.isEmpty {
+                requireAlert(mensagem: "Nome do produto é obrigatório")
+                return 
+            }else{
+                product.name = name
+            }
+        }
+       
+        if let price = tfPrice.text {
+            if tfPrice.text!.isEmpty {
+                requireAlert(mensagem: "Valor do produto é obrigatório")
+                return
+            }else {
+                product.price = Double( price )!
+            }
         }
         
+        //validar imagem
         product.cover = ivImagemProduto.image
         product.credit_card = creditCard.isOn
         
         if !tfPurchaseState.text!.isEmpty {
             let state = statesManager.states[pickerView.selectedRow(inComponent: 0)]
             product.state = state
-        }        
+        }else{
+            requireAlert(mensagem: "Estado da compra é obrigatório")
+            return
+        }
         
         do{
             try context.save()
@@ -92,6 +109,17 @@ class AddEditProductViewController: UIViewController {
         }
         
     }
+    
+    func requireAlert(mensagem: String){
+        
+        let alert = UIAlertController(title: mensagem, message: nil, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        
+        present(alert, animated: true)
+        
+    }
+
     
     func decimal(with string: String) -> NSDecimalNumber {
         let formatter = NumberFormatter()

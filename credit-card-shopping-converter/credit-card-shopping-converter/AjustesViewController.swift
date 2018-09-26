@@ -11,10 +11,17 @@ import CoreData
 
 class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
     var labelEmptyTable = UILabel()
-    var fetchedResultsController: NSFetchedResultsController<States>!
+    var fetchedStatesResultsController: NSFetchedResultsController<States>!
+    var fetchedRatesResultsController: NSFetchedResultsController<Rates>!
+    
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var dollarQuotation: UITextField!
+    @IBOutlet weak var taxOnFinancialOrder: UITextField!
+    
+    var rate: Rates!
+    var _dollarQuotation:Double = 0.0
+    var _taxOnFinancialOrder: Double = 0.0
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
@@ -24,6 +31,7 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        loadTax()
         loadStates()
     }
     
@@ -32,12 +40,12 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedStatesResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         
-        fetchedResultsController.delegate = self
+        fetchedStatesResultsController.delegate = self
         
         do{
-            try fetchedResultsController.performFetch()
+            try fetchedStatesResultsController.performFetch()
         }catch{
             print(error.localizedDescription)
         }
@@ -48,19 +56,54 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.didReceiveMemoryWarning()
     }
     
+    func requireAlert(mensagem: String){
+        
+        let alert = UIAlertController(title: mensagem, message: nil, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        
+        present(alert, animated: true)
+        
+    }
+    
+    func loadTax(){
+
+
+
+    }
+    
     @IBAction func addEstado(_ sender: Any) {
+        
+        if let _letDollarQuotation = dollarQuotation.text {
+            if dollarQuotation.text!.isEmpty {
+                requireAlert(mensagem: "Cotação do dóllar é obrigatório")
+                return
+            }else{
+                self._dollarQuotation = Double(_letDollarQuotation)!
+            }
+        }
+        
+        if let _letTaxOnFinancialOrder = taxOnFinancialOrder.text {
+            if taxOnFinancialOrder.text!.isEmpty {
+                requireAlert(mensagem: "IOF é obrigatório")
+                return
+            }else{
+                self._taxOnFinancialOrder = Double(_letTaxOnFinancialOrder)!
+            }
+        }
+        
         showAlert(state: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = fetchedResultsController.fetchedObjects?.count ?? 0
+        let count = fetchedStatesResultsController.fetchedObjects?.count ?? 0
         return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_states", for: indexPath) 
-        guard let state = fetchedResultsController.fetchedObjects?[indexPath.row] else { return cell }
+        guard let state = fetchedStatesResultsController.fetchedObjects?[indexPath.row] else { return cell }
 
         cell.textLabel?.text = state.name
         cell.detailTextLabel?.text = "\(state.tribute)%"
@@ -92,6 +135,11 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         
         alert.addAction(UIAlertAction(title: title, style: .default, handler: { (action) in
+            
+            let rate = Rates(context: self.context)
+            rate.dollarQuotation = self._dollarQuotation
+            rate.taxOnFinancialOrder = self._taxOnFinancialOrder
+            
             let state = state ?? States(context: self.context)
             state.name = alert.textFields?.first?.text
             
@@ -116,13 +164,13 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let product = fetchedResultsController.fetchedObjects?[indexPath.row] else {return}
+            guard let product = fetchedStatesResultsController.fetchedObjects?[indexPath.row] else {return}
             context.delete(product)
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let state = fetchedResultsController.object(at: indexPath)
+        let state = fetchedStatesResultsController.object(at: indexPath)
         showAlert(state: state)
         tableView.deselectRow(at: indexPath, animated: true)
     }
