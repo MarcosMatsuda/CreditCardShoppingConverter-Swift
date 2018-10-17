@@ -75,7 +75,7 @@
         <scene sceneID="YmD-zH-X6C">
             <objects>
                 <navigationController id="Tye-Xh-wdH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Compras" id="u8X-L1-uqA"/>
+                    <tabBarItem key="tabBarItem" title="Compras" image="bag" id="u8X-L1-uqA"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QYB-rl-WtN">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -128,7 +128,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="cca-se-gLo"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Total de compras" id="AXo-2O-1tZ"/>
+                    <tabBarItem key="tabBarItem" title="Total de compras" image="bag" id="AXo-2O-1tZ"/>
                     <connections>
                         <outlet property="lbTotalDollar" destination="nhc-Eo-rOe" id="Fur-iu-Lhb"/>
                         <outlet property="lbTotalReal" destination="gQN-2n-obx" id="BnV-1h-4iq"/>
@@ -267,9 +267,9 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Impostos por estado" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5fF-RU-gXE">
-                                <rect key="frame" x="95" y="237" width="158" height="21"/>
+                                <rect key="frame" x="95" y="237" width="193" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -316,7 +316,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="92b-A9-jNW"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Ajustes" id="BCq-7V-u6X"/>
+                    <tabBarItem key="tabBarItem" title="Ajustes" image="settings" id="BCq-7V-u6X"/>
                     <connections>
                         <outlet property="dollarQuotation" destination="56U-PO-yeT" id="NAo-7x-zMX"/>
                         <outlet property="tableView" destination="xPA-0N-KGk" id="3tY-yT-lwQ"/>
@@ -349,9 +349,11 @@
     </scenes>
     <resources>
         <image name="add.png" width="225" height="225"/>
+        <image name="bag" width="23" height="23"/>
+        <image name="settings" width="23" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XSg-KA-RGS"/>
+        <segue reference="MWj-2P-ESj"/>
         <segue reference="PZh-m4-EtJ"/>
     </inferredMetricsTieBreakers>
 </document>

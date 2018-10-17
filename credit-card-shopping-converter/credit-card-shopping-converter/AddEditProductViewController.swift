@@ -50,10 +50,10 @@ class AddEditProductViewController: UIViewController {
             let credit = product.credit_card ? true : false
             creditCard.setOn(credit, animated:true)
 
-            lbAddEdit.setTitle("Alterar", for: .normal)
+            lbAddEdit.setTitle("ALTERAR", for: .normal)
 
         }else{
-            title = "Adicionar produto"
+            title = "Cadastrar produto"
         }
     }
     
@@ -189,14 +189,6 @@ class AddEditProductViewController: UIViewController {
         present(imagePicker, animated: true, completion: nil)
         
     }
-
-//    func createPurchaseStatePicker(){
-//
-//        let purchaseStatePicker = UIPickerView()
-//        purchaseStatePicker.delegate = self
-//        tfPurchaseState.inputView = purchaseStatePicker
-////        tfPurchaseState.isUserInteractionEnabled = false
-//    }
 
     func createToolBar(){
 

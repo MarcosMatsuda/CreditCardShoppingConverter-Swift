@@ -13,16 +13,12 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var labelEmptyTable = UILabel()
     var fetchedStatesResultsController: NSFetchedResultsController<States>!
-    var fetchedRatesResultsController: NSFetchedResultsController<Rates>!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dollarQuotation: UITextField!
     @IBOutlet weak var taxOnFinancialOrder: UITextField!
     
-    var rate: Rates!
-    var _dollarQuotation:Double = 0.0
-    var _taxOnFinancialOrder: Double = 0.0
-    
+    let settingBundleHelper = SettingBundleHelper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +26,8 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.dataSource = self
         loadStates()
         
-        let appDefaults = [String:AnyObject]()
-        UserDefaults.standard.register(defaults: appDefaults)
+//        let appDefaults = [String:AnyObject]()
+//        UserDefaults.standard.register(defaults: appDefaults)
         
         //ONLY READ
         dollarQuotation.isUserInteractionEnabled = false
@@ -42,17 +38,9 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-        let userDefaults = UserDefaults.standard
         
-        let iof_reference = userDefaults.string(forKey: "iof_reference")
-        if let iof = iof_reference{
-            taxOnFinancialOrder.text = iof
-        }
-        
-        let cotacao_dollar_reference = userDefaults.string(forKey: "cotacao_dollar_reference")
-        if let dollar = cotacao_dollar_reference{
-            dollarQuotation.text = dollar
-        }
+        dollarQuotation.text = String(describing: settingBundleHelper.getDollarPrice() )
+        taxOnFinancialOrder.text = String(describing: settingBundleHelper.IOFPrice() )
     }
     
     func loadStates(){
@@ -132,10 +120,6 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         
         alert.addAction(UIAlertAction(title: title, style: .default, handler: { (action) in
-            
-            let rate = Rates(context: self.context)
-            rate.dollarQuotation = self._dollarQuotation
-            rate.taxOnFinancialOrder = self._taxOnFinancialOrder
             
             let state = state ?? States(context: self.context)
             if let stateField = alert.textFields?.first, !(stateField.text?.isEmpty)!{

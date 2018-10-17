@@ -12,6 +12,7 @@
 		3A91D8E6213CE21C00F89250 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A91D8E5213CE21C00F89250 /* ProductTableViewCell.swift */; };
 		3A9A66B62176A8440025AE5E /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A9A66B52176A8440025AE5E /* add.png */; };
 		3AB401F32140E80C0015D1C9 /* AjustesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB401F22140E80C0015D1C9 /* AjustesViewController.swift */; };
+		3AD7B23C217771CB00856B0B /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD7B23B217771CB00856B0B /* SettingsBundleHelper.swift */; };
 		3ADD5666213780C50074861F /* ViewController+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD5665213780C50074861F /* ViewController+CoreData.swift */; };
 		3ADD566821379F540074861F /* StatesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD566721379F540074861F /* StatesManager.swift */; };
 		3AF8D02421338473004D61C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF8D02321338473004D61C0 /* AppDelegate.swift */; };
@@ -30,6 +31,7 @@
 		3A91D8E5213CE21C00F89250 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		3A9A66B52176A8440025AE5E /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		3AB401F22140E80C0015D1C9 /* AjustesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjustesViewController.swift; sourceTree = "<group>"; };
+		3AD7B23B217771CB00856B0B /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
 		3ADD5665213780C50074861F /* ViewController+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CoreData.swift"; sourceTree = "<group>"; };
 		3ADD566721379F540074861F /* StatesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesManager.swift; sourceTree = "<group>"; };
 		3AF8D02021338473004D61C0 /* credit-card-shopping-converter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "credit-card-shopping-converter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +87,7 @@
 			children = (
 				3A9A66B42176A81A0025AE5E /* Files */,
 				3AF8D02321338473004D61C0 /* AppDelegate.swift */,
+				3AD7B23B217771CB00856B0B /* SettingsBundleHelper.swift */,
 				3A61320C21586B1F00D83214 /* ResultViewController.swift */,
 				3AF8D02521338473004D61C0 /* ViewController.swift */,
 				3ADD5665213780C50074861F /* ViewController+CoreData.swift */,
@@ -183,6 +186,7 @@
 				3A61320D21586B1F00D83214 /* ResultViewController.swift in Sources */,
 				3ADD566821379F540074861F /* StatesManager.swift in Sources */,
 				3ADD5666213780C50074861F /* ViewController+CoreData.swift in Sources */,
+				3AD7B23C217771CB00856B0B /* SettingsBundleHelper.swift in Sources */,
 				3AF8D03B21339FD6004D61C0 /* ProductTableViewController.swift in Sources */,
 				3AF8D02C21338473004D61C0 /* credit_card_shopping_converter.xcdatamodeld in Sources */,
 			);
