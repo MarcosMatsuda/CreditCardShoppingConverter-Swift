@@ -32,7 +32,6 @@ class ProductTableViewCell: UITableViewCell {
         lbName.text = product.name ?? ""
         lbPrice.text = "US$ \( String(describing: product.price) )"        
         ImageProduct.image = product.cover as? UIImage
-//        lbCreditCard.text = String(product.credit_card)        
     }
     
 }

@@ -1,5 +1,5 @@
 //
-//  UIViewController+CoreData.swift
+//  ViewController+CoreData.swift
 //  credit-card-shopping-converter
 //
 //  Created by Marcos Matsuda on 29/08/2018.

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string></string>
+	<string>Preciso acessar sua biblioteca de fotos</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Preciso de acesso à sua câmera</string>
 	<key>LSApplicationCategoryType</key>

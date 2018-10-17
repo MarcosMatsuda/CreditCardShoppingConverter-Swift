@@ -23,16 +23,36 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
     var _dollarQuotation:Double = 0.0
     var _taxOnFinancialOrder: Double = 0.0
     
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
-    }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        loadTax()
         loadStates()
+        
+        let appDefaults = [String:AnyObject]()
+        UserDefaults.standard.register(defaults: appDefaults)
+        
+        //ONLY READ
+        dollarQuotation.isUserInteractionEnabled = false
+        taxOnFinancialOrder.isUserInteractionEnabled = false
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+        let userDefaults = UserDefaults.standard
+        
+        let iof_reference = userDefaults.string(forKey: "iof_reference")
+        if let iof = iof_reference{
+            taxOnFinancialOrder.text = iof
+        }
+        
+        let cotacao_dollar_reference = userDefaults.string(forKey: "cotacao_dollar_reference")
+        if let dollar = cotacao_dollar_reference{
+            dollarQuotation.text = dollar
+        }
     }
     
     func loadStates(){
@@ -66,32 +86,9 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
-    func loadTax(){
-
-
-
-    }
+  
     
     @IBAction func addEstado(_ sender: Any) {
-        
-        if let _letDollarQuotation = dollarQuotation.text {
-            if dollarQuotation.text!.isEmpty {
-                requireAlert(mensagem: "Cotação do dóllar é obrigatório")
-                return
-            }else{
-                self._dollarQuotation = Double(_letDollarQuotation)!
-            }
-        }
-        
-        if let _letTaxOnFinancialOrder = taxOnFinancialOrder.text {
-            if taxOnFinancialOrder.text!.isEmpty {
-                requireAlert(mensagem: "IOF é obrigatório")
-                return
-            }else{
-                self._taxOnFinancialOrder = Double(_letTaxOnFinancialOrder)!
-            }
-        }
-        
         showAlert(state: nil)
     }
     
@@ -141,10 +138,22 @@ class AjustesViewController: UIViewController, UITableViewDelegate, UITableViewD
             rate.taxOnFinancialOrder = self._taxOnFinancialOrder
             
             let state = state ?? States(context: self.context)
-            state.name = alert.textFields?.first?.text
+            if let stateField = alert.textFields?.first, !(stateField.text?.isEmpty)!{
+                state.name = stateField.text
+            }else{
+                self.requireAlert(mensagem: "Nome do estado é obrigatório")
+                self.context.rollback()
+                return
+            }
             
-            let tributeValue = alert.textFields?.last?.text
-            state.tribute = tributeValue?.toDouble() ?? 0.0
+            if let taxField = alert.textFields?.last, !(taxField.text?.isEmpty)!{
+                let tributeValue = alert.textFields?.last?.text
+                state.tribute = tributeValue?.toDouble() ?? 0.0
+            }else{
+                self.requireAlert(mensagem: "Imposto é obrigatório")
+                self.context.rollback()
+                return
+            }
             
             do {
                 try self.context.save()
