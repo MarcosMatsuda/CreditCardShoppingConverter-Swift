@@ -1,5 +1,5 @@
 //
-//  ViewController+CoreData.swift
+//  UIViewController+CoreData.swift
 //  credit-card-shopping-converter
 //
 //  Created by Marcos Matsuda on 29/08/2018.
@@ -9,12 +9,10 @@
 import UIKit
 import CoreData
 
-extension UIViewController{
-    
-    var context: NSManagedObjectContext{
+extension UIViewController {
+    var context: NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
-    
 }
 
